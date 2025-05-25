@@ -220,15 +220,6 @@ class TestProductRoutes(TestCase):
         data = response.get_json()
         self.assertIn("was not found", data["message"])
 
-    @app.route("/products", methods=["GET"])
-    def list_products():
-        """Returns a list of Products"""
-        app.logger.info("Request to list Products...")
-        products = Product.all()
-        results = [product.serialize() for product in products]
-        app.logger.info("[%s] Products returned", len(results))
-        return results, status.HTTP_200_OK
-
     def test_query_by_name(self):
         """It should Query Products by name"""
         products = self._create_products(5)
